@@ -1,0 +1,38 @@
+# Yaazh - Tamil TTS (SpeechT5 fine-tune)
+# Install with:   pip install -r requirements.txt
+#
+# Why these exact versions?
+# - torch 2.11 (not 2.12): speechbrain needs torchaudio, and the newest
+#   torchaudio is 2.11, which only works with torch 2.11.
+# - "+cu126" = the CUDA 12.6 GPU build. Without it, pip would install a CPU-only torch.
+# - datasets 3.6: decodes WAV audio with `soundfile`. Newer datasets (4.x/5.x)
+#   need torchcodec + a separate FFmpeg install, which is painful on Windows.
+# - transformers 4.57: matches the Hugging Face SpeechT5 fine-tuning tutorial.
+
+--extra-index-url https://download.pytorch.org/whl/cu126
+
+# Deep learning core
+torch==2.11.0+cu126
+torchaudio==2.11.0+cu126
+transformers==4.57.6
+accelerate>=1.0,<2.0
+
+# Data loading + audio
+datasets[audio]==3.6.0
+huggingface_hub[hf_xet]==0.36.2   # hf_xet = faster downloads (this dataset uses Xet storage)
+soundfile>=0.12.1
+librosa>=0.10
+
+# Speaker embeddings (x-vectors)
+speechbrain==1.1.2
+
+# Text: tokenizer backend + Tamil -> Latin romanization
+sentencepiece>=0.2.0
+indic-transliteration==2.3.82
+
+# Demo app + training dashboard
+gradio==5.50.0
+pandas>=2.0
+
+# Tests
+pytest>=8.0

@@ -1,0 +1,14 @@
+# Large / generated files - never commit these
+.venv/
+data/
+outputs/
+pretrained_models/
+*.wav
+__pycache__/
+.pytest_cache/
+
+# Benchmark: keep the script + score table, not dataset sentences / audio / logs
+benchmark/audio/
+benchmark/run.log
+benchmark/results.json
+benchmark/sentences.json
